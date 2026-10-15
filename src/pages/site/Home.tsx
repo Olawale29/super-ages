@@ -28,7 +28,7 @@ function Hero() {
         <Photo src="heroField" className="h-full w-full" position="center 60%" eager kenburns />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,19,8,.5)_0%,rgba(8,19,8,0)_26%,rgba(8,19,8,.05)_52%,rgba(8,19,8,.82)_100%)]" />
       </div>
-      <div className="wrap relative pb-56 sm:pb-48">
+      <div className="wrap relative pb-20 sm:pb-48">
         <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
           <div className="min-w-0">
             <div className="mb-6 flex animate-rise items-center gap-3 text-[11px] font-semibold uppercase tracking-label text-white/80">
