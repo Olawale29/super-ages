@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Super Ages design tokens.
+  Layout concept: editorial "field ledger": large photography, serif headlines,
+  hairline rules and small tracked labels, with lime used only as a signature mark.
+  The brand commits to one light visual world, so colours are set explicitly.
+*/
+:root {
+  --sa-lime: #C0D20D;
+  --sa-ink: #081308;
+  --sa-canvas: #F6FAF6;
+  --sa-agri: #1A9959;
+  --sa-mlime: #DBE47A;
+  --sa-sage: #798179;
+  --sa-botanical: #88C6A7;
+  --sa-pale: #F2FDD8;
+  --sa-line: #DDE5DC;
+  --font-serif: "Instrument Serif", "DM Serif Display", Georgia, serif;
+  --font-sans: Manrope, Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--sa-canvas);
+  color: var(--sa-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { text-wrap: balance; }
+/* Grid children shrink instead of pushing the page wider */
+.grid > * { min-width: 0; }
+::selection { background: var(--sa-mlime); color: var(--sa-ink); }
+:focus-visible { outline: 2px solid var(--sa-agri); outline-offset: 2px; border-radius: 4px; }
+
+@layer components {
+  /* Side gutter: safe-area aware, never below 16px */
+  .gutter {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  @media (min-width: 768px) {
+    .gutter {
+      padding-left: max(32px, env(safe-area-inset-left, 0px));
+      padding-right: max(32px, env(safe-area-inset-right, 0px));
+    }
+  }
+  @media (min-width: 1280px) {
+    .gutter {
+      padding-left: max(48px, env(safe-area-inset-left, 0px));
+      padding-right: max(48px, env(safe-area-inset-right, 0px));
+    }
+  }
+  .wrap { @apply mx-auto w-full max-w-site gutter; }
+
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-label text-sage; }
+  .display { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.015em; line-height: 0.98; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  .card { @apply rounded-md border border-line bg-white; }
+  .hair { @apply border-line; }
+
+  .field-label { @apply mb-1.5 block text-[12px] font-semibold tracking-wide text-ink; }
+  .field-input {
+    @apply w-full rounded border border-line bg-white px-3.5 py-2.5 text-[14px] text-ink outline-none transition;
+    @apply placeholder:text-sage/80 focus:border-agri focus:ring-2 focus:ring-agri/15;
+  }
+  .field-input[aria-invalid="true"] { @apply border-danger focus:ring-danger/15; }
+
+  .link-u { background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .35s ease; }
+  .link-u:hover { background-size: 100% 1px; }
+
+  .scroll-x { @apply overflow-x-auto; -webkit-overflow-scrolling: touch; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
+
+/* Placeholder captions only where the frame is wide enough */
+.photo-frame { container-type: inline-size; }
+@container (max-width: 200px) { .photo-cap { display: none; } }
+
+/* Photo zoom on hover for editorial images */
+.zoom-img img { transition: transform 1.2s cubic-bezier(.2,.6,.2,1); }
+.zoom-img:hover img { transform: scale(1.035); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
